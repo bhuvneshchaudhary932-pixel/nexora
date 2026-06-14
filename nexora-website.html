@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nexora — Full-Funnel Marketing Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141d;
+    --surface-2: #1d1d29;
+    --border: rgba(255,255,255,0.08);
+    --text: #f4f3f8;
+    --text-soft: #9a98ac;
+    --pink: #ff5da2;
+    --teal: #4decc4;
+    --purple: #8b6cff;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; border-radius: 4px; }
+
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- Aurora background ---------- */
+  .aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(100px); }
+  .blob-pink { width: 480px; height: 480px; background: var(--pink); opacity: 0.35; top: -120px; left: -120px; animation: float-a 24s ease-in-out infinite; }
+  .blob-teal { width: 560px; height: 560px; background: var(--teal); opacity: 0.28; top: 80px; right: -180px; animation: float-b 28s ease-in-out infinite; }
+  .blob-purple { width: 420px; height: 420px; background: var(--purple); opacity: 0.32; bottom: -160px; left: 28%; animation: float-c 26s ease-in-out infinite; }
+
+  @keyframes float-a { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(80px, 50px) scale(1.12); } }
+  @keyframes float-b { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-60px, 70px) scale(1.08); } }
+  @keyframes float-c { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px, -40px) scale(1.1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none !important; }
+  }
+
+  /* ---------- Nav ---------- */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(14px); background: rgba(10,10,15,0.6); border-bottom: 1px solid var(--border); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.5rem; max-width: 1180px; margin: 0 auto; }
+  .logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.04em; }
+  .logo span { background: linear-gradient(90deg, var(--pink), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.95rem; color: var(--text-soft); }
+  .nav-links a:hover { color: var(--text); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.5rem; border-radius: 999px; font-weight: 500; font-size: 0.95rem; transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-secondary { border: 1px solid var(--border); color: var(--text); }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+  .nav-cta { padding: 0.6rem 1.3rem; font-size: 0.9rem; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8rem 1.5rem 4rem; }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .hero h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.1; max-width: 900px; position: relative; z-index: 1; letter-spacing: -0.01em; }
+  .hero h1 .highlight { background: linear-gradient(90deg, var(--pink), var(--purple), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero-sub { margin-top: 1.5rem; font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-soft); max-width: 620px; position: relative; z-index: 1; }
+  .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+  .hero-tags { margin-top: 3.5rem; display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+  .tag { font-family: var(--font-mono); font-size: 0.78rem; padding: 0.4rem 0.9rem; border: 1px solid var(--border); border-radius: 999px; color: var(--text-soft); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 6rem 0; position: relative; }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--teal); text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.8rem); max-width: 700px; letter-spacing: -0.01em; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; transition: border-color 0.25s ease, transform 0.25s ease; }
+  .service-card:hover { border-color: var(--purple); transform: translateY(-4px); }
+  .service-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 6px; background: var(--surface-2); color: var(--teal); letter-spacing: 0.1em; }
+  .service-card h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 1rem 0 0.6rem; }
+  .service-card p { color: var(--text-soft); font-size: 0.95rem; }
+
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Process ---------- */
+  .process-list { margin-top: 3rem; display: flex; flex-direction: column; }
+  .process-step { display: grid; grid-template-columns: 90px 1fr; gap: 1.5rem; padding: 2rem 0; border-top: 1px solid var(--border); align-items: start; }
+  .process-step:last-child { border-bottom: 1px solid var(--border); }
+  .step-num { font-family: var(--font-mono); font-size: 1rem; color: var(--text-soft); padding-top: 0.2rem; }
+  .process-step h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .process-step p { color: var(--text-soft); max-width: 560px; }
+
+  @media (max-width: 600px) {
+    .process-step { grid-template-columns: 50px 1fr; }
+  }
+
+  /* ---------- Why ---------- */
+  .why-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .why-card { padding: 0.5rem 0 0.5rem 1.5rem; border-left: 2px solid var(--border); }
+  .why-card:nth-child(1) { border-left-color: var(--pink); }
+  .why-card:nth-child(2) { border-left-color: var(--teal); }
+  .why-card:nth-child(3) { border-left-color: var(--purple); }
+  .why-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .why-card p { color: var(--text-soft); font-size: 0.95rem; }
+
+  @media (max-width: 768px) {
+    .why-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  /* ---------- Work ---------- */
+  .work-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .work-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; display: flex; flex-direction: column; gap: 0.6rem; transition: border-color 0.25s ease, transform 0.25s ease; }
+  .work-card:hover { border-color: var(--pink); transform: translateY(-4px); }
+  .work-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 6px; background: var(--surface-2); letter-spacing: 0.1em; align-self: flex-start; }
+  .work-card:nth-child(1) .work-tag { color: var(--pink); }
+  .work-card:nth-child(2) .work-tag { color: var(--teal); }
+  .work-card:nth-child(3) .work-tag { color: var(--purple); }
+  .work-card:nth-child(4) .work-tag { color: var(--pink); }
+  .work-client { font-family: var(--font-display); font-size: 1.25rem; margin-top: 0.4rem; }
+  .work-location { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-soft); }
+  .work-result { color: var(--text-soft); font-size: 0.95rem; }
+  .work-stat { font-family: var(--font-display); font-weight: 700; font-size: 2.6rem; line-height: 1; margin-top: 0.4rem; background: linear-gradient(90deg, var(--pink), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  @media (max-width: 768px) {
+    .work-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Contact ---------- */
+  .contact { text-align: center; }
+  .contact .container { position: relative; z-index: 1; }
+  .contact-links { margin-top: 3rem; display: flex; justify-content: center; }
+  .contact-card { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.5rem 2rem; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); transition: border-color 0.25s ease, transform 0.25s ease; max-width: 320px; width: 100%; }
+  .contact-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .contact-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
+  .contact-value { font-family: var(--font-display); font-size: 1.05rem; word-break: break-word; }
+
+  /* ---------- Floating WhatsApp button ---------- */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    width: 58px;
+    height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+  }
+  .whatsapp-float:hover { transform: scale(1.08); }
+  .whatsapp-float svg { width: 30px; height: 30px; }
+  .whatsapp-float::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25D366;
+    animation: pulse-ring 2.2s ease-out infinite;
+    z-index: -1;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-float::before { animation: none; }
+  }
+  @media (max-width: 600px) {
+    .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+    .whatsapp-float svg { width: 26px; height: 26px; }
+  }
+
+  /* ---------- Footer ---------- */
+  .footer { border-top: 1px solid var(--border); padding: 2.5rem 0; color: var(--text-soft); font-size: 0.9rem; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 600px) {
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">NEX<span>ORA</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why us</a>
+      <a href="#work">Our work</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-primary nav-cta">Book a call</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-pink"></div>
+    <div class="blob blob-teal"></div>
+    <div class="blob blob-purple"></div>
+  </div>
+  <p class="eyebrow">Nexora — Full-Funnel Marketing Studio</p>
+  <h1>We build brands people <span class="highlight">can't scroll past.</span></h1>
+  <p class="hero-sub">Strategy, content, performance ads and SEO — run by one team, measured by one number: your revenue.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">Book a free strategy call</a>
+    <a href="#services" class="btn btn-secondary">See what we do</a>
+  </div>
+  <div class="hero-tags">
+    <span class="tag">Local businesses</span>
+    <span class="tag">E-commerce</span>
+    <span class="tag">Coaches & creators</span>
+    <span class="tag">Real estate & finance</span>
+  </div>
+</header>
+
+<section id="services">
+  <div class="container reveal">
+    <p class="section-eyebrow">[ Services ]</p>
+    <h2 class="section-title">One team. Every channel your brand needs.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-tag">SMM</span>
+        <h3>Social Media Marketing</h3>
+        <p>Content systems that build an audience and keep it — across Instagram, YouTube, and wherever your customers scroll.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-tag">ADS</span>
+        <h3>Performance Advertising</h3>
+        <p>Meta and Google campaigns engineered for return on ad spend, not vanity metrics.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-tag">SEO</span>
+        <h3>Search Engine Optimization</h3>
+        <p>Rank where your customers are already searching, and turn that traffic into enquiries.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-tag">BRAND</span>
+        <h3>Content & Branding</h3>
+        <p>Visual identity, messaging and creative that make your brand instantly recognisable and trusted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container reveal">
+    <p class="section-eyebrow">[ How we work ]</p>
+    <h2 class="section-title">From audit to scale, in four phases.</h2>
+    <div class="process-list">
+      <div class="process-step">
+        <span class="step-num">01</span>
+        <div>
+          <h3>Discover</h3>
+          <p>We audit your current presence, your competitors and your audience — so we know exactly where the gaps and opportunities are before we touch anything.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="step-num">02</span>
+        <div>
+          <h3>Strategy</h3>
+          <p>We build a 90-day growth roadmap tailored to your business — channels, content pillars, ad budgets and goals, all mapped out.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="step-num">03</span>
+        <div>
+          <h3>Execute</h3>
+          <p>Content goes live, campaigns launch, pages get optimised. Every move is tracked from day one.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="step-num">04</span>
+        <div>
+          <h3>Scale</h3>
+          <p>We double down on what's working, cut what isn't, and report results every month in plain language.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container reveal">
+    <p class="section-eyebrow">[ Why Nexora ]</p>
+    <h2 class="section-title">Built for brands that mean business.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>One team, every channel</h3>
+        <p>Stop juggling five freelancers and three agencies. Your strategy, content, ads and SEO live under one roof, working off one plan.</p>
+      </div>
+      <div class="why-card">
+        <h3>Decisions backed by data</h3>
+        <p>Weekly reporting shows exactly what's working, what's not, and what we're changing next — no guesswork.</p>
+      </div>
+      <div class="why-card">
+        <h3>Built to scale with you</h3>
+        <p>From a single local business to a multi-location brand, our systems and team grow alongside yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container reveal">
+    <p class="section-eyebrow">[ Our Work ]</p>
+    <h2 class="section-title">Real businesses, real results.</h2>
+    <div class="work-grid">
+      <div class="work-card">
+        <span class="work-tag">FITNESS</span>
+        <h3 class="work-client">AAA+ Gym</h3>
+        <div class="work-stat">100+</div>
+        <p class="work-result">New clients brought in for the gym through targeted social media campaigns and local lead generation.</p>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">RESTAURANTS</span>
+        <h3 class="work-client">Eddy's Restaurant &amp; Sandwages</h3>
+        <span class="work-location">Ghaziabad</span>
+        <p class="work-result">Grew monthly sales for both outlets through local social media promotions and offers — results visible within the first month.</p>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">REAL ESTATE</span>
+        <h3 class="work-client">Om Sai Properties</h3>
+        <span class="work-location">Noida</span>
+        <p class="work-result">Helped generate a steady flow of qualified property enquiries through targeted campaigns, leading to more closed sales.</p>
+      </div>
+      <div class="work-card">
+        <span class="work-tag">HEALTHCARE</span>
+        <h3 class="work-client">Clinics &amp; Dental Practices</h3>
+        <p class="work-result">Built patient-acquisition systems for clinics and dentists, bringing in consistent new-patient enquiries every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-purple" style="width: 400px; height: 400px; opacity: 0.22;"></div>
+    <div class="blob blob-teal" style="width: 380px; height: 380px; opacity: 0.16; top: auto; right: auto; bottom: -140px; left: 10%;"></div>
+  </div>
+  <div class="container reveal">
+    <p class="section-eyebrow">[ Get started ]</p>
+    <h2 class="section-title" style="margin: 0 auto;">Let's build something that compounds.</h2>
+    <p style="color: var(--text-soft); margin-top: 1rem; max-width: 480px; margin-left: auto; margin-right: auto;">Tell us about your business — we'll get back within 24 hours with a free growth plan.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/6289529347754" class="contact-card" target="_blank" rel="noopener">
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+62 895 2934 7754</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="logo" style="font-size: 1rem;">NEX<span>ORA</span></span>
+    <p>© 2026 Nexora. Full-funnel marketing studio.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/6289529347754" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.005c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.39-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.146 8.146 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.184 8.184 0 0 1 2.41 5.83c.01 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.18-.53.06-.24-.12-1.01-.37-1.92-1.18-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.03-.43-.07-.12-.62-1.5-.86-2.05-.22-.54-.45-.47-.62-.48-.16-.01-.35-.01-.54-.01-.19 0-.49.07-.75.34-.26.27-1 1-1 2.43 0 1.44 1.04 2.83 1.18 3.02.14.19 1.97 3.02 4.79 4.11 2.81 1.1 2.81.73 3.32.69.51-.05 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.33-.07-.11-.25-.18-.5-.3z"/>
+  </svg>
+</a>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
